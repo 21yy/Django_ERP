@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Register {% endblock %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap-theme.min.css' %}">
+
+{% block content %}
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#user_register" role="tab" data-toggle="tab">Individual Register</a></li>
+        <li role="presentation"><a href="#com_register" role="tab" data-toggle="tab">Company Register</a> </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="user_register">
+            <div style="margin: 5% 25%;">
+                <form method="POST" class="form-group" action="/register/" id = user_register>
+                    <h2 class="text-center">Individual Register</h2>
+
+                    {% if message %}
+                          <div class="alert alert-warning">{{ message }}</div>
+                    {% endif %}
+                    {% csrf_token %}
+                    {{ com_form.errors }}
+                    {{ com_form.non_field_errors }}
+                    {{user_form|crispy}}
+                    <button type="reset" class="btn btn-default pull-left">Reset</button>
+                    <button type="submit" class="btn btn-success pull-right">Register</button>
+                </form>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="com_register">
+            <div style="margin: 5% 25%;">
+                <form method="POST" class="form-group" action="/registerCom/" id="register_com">
+                    <h2 class="text-center">Register</h2>
+                    {% if message %}
+                          <div class="alert alert-warning">{{ message }}</div>
+                    {% endif %}
+                    {% csrf_token %}
+                    {{ com_form.errors }}
+                    {{ com_form.non_field_errors }}
+                    {{com_form|crispy}}
+                    <button type="reset" class="btn btn-default pull-left">Reset</button>
+                    <button type="submit" class="btn btn-success pull-right">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>

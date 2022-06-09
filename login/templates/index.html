@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap-theme.min.css' %}">
+
+</head>
+    {% block title %}
+        Home Page
+    {% endblock %}
+
+{% block content %}
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    {% if request.session.is_login %}
+        <h1>Hello, {{ request.session.user_name }}</h1>
+    {% else %}
+        <h1>Sign in Please!</h1>
+    {% endif %}
+{#    <ul class="nav nav-tabs" role="tablist">#}
+{#    <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">Home</a> </li>#}
+{#        <li role="presentation"><a href="#ho" role="tab" data-toggle="tab">Ho</a> </li>#}
+{#        <li role="presentation"><a href="#user_register" role="tab" data-toggle="tab">Individual Register</a></li>#}
+{#    </ul>#}
+{#    <div class="tab-content">#}
+{#        <div role="tabpanel" class="tab-pane active" id="home">#}
+{#            <table border="2">#}
+{#222#}
+{#            </table>#}
+{#        </div>#}
+{#        <div role="tabpanel" class="tab-pane" id="ho">#}
+{#             <table border="2">#}
+{#111#}
+{#             </table>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}
+</html>
