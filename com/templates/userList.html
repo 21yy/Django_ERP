@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} employee {% endblock %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap-theme.min.css' %}">
+
 <body>
+{% block content %}
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <table class="table stats-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th><a href="/add_user/">Add</a></th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <th scope="row">{{ user.username }}</th>
+                <th >{{ user.type }}</th>
+                <th>{{ user.gender }}</th>
+                <th>{{ user.email }}</th>
+                <th><a href="/update_user/?id={{ user.id }}">Edit</a></th>
+                <th><a href="/delete_user/?id={{ user.id }}">Delete</a></th>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
 
 </body>
 </html>
