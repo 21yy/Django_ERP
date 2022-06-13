@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} employee {% endblock %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap-theme.min.css' %}">
 
-</body>
+{% block content %}
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <table class="table stats-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Permissions</th>
+                <th><a href="/add_pos/">Add</a></th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for pos in pos_list %}
+            <tr>
+                <th scope="row">{{ pos.pos_name }}</th>
+                <th >{{ pos.permissions }}</th>
+                <th><a href="/update_pos/?id={{ pos.id }}">Edit</a></th>
+                <th><a href="/delete_pos/?id={{ pos.id }}">Delete</a></th>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
 </html>

@@ -67,14 +67,13 @@ def register_company(request):
     if request.method == "POST":
         com_form = CompanyForm(request.POST)
         user_form = RegisterForm(request.POST)
-        message = ''
         if com_form.is_valid() and user_form.is_valid():
             same_com = Company.objects.filter(com_name=com_form.cleaned_data['company_name'])
             same_user = User.objects.filter(username=user_form.cleaned_data['username'])
             if same_com:
-                message = 'This company registered already'
+                messages.error(request, 'This company registered already')
             elif same_user:
-                message = 'The same account name exists'
+                messages.error(request, 'The same account name exists')
             else:
                 new_com = Company.objects.create(com_name=com_form.cleaned_data['company_name'],
                                                  address=com_form.cleaned_data['address'],

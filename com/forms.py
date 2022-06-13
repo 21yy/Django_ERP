@@ -11,3 +11,11 @@ class EmployeeForm(RegisterForm):
 
     class Meta(RegisterForm.Meta):
         fields = ["username", "position_name", "email", "password1", "password2", "gender"]
+
+
+class PositionForm(forms.ModelForm):
+
+    class Meta:
+        model = Position
+        fields = ['pos_name', 'permissions']
+        exclude = ['company_name']
